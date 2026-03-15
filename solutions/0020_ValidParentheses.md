@@ -1,24 +1,28 @@
-# [NNNN]. [Problem Title]
+# 0020.Valid Parentheses
 
-**Difficulty:** Easy / Medium / Hard
-**Tags:** `Array` `Two Pointers` `Hash Map` *(replace with actual tags)*
-**Date:** YYYY-MM-DD
-**Link:** [LeetCode](https://leetcode.com/problems/problem-slug/)
+**Difficulty:** Easy
+**Tags:** `String` `Stack`
+**Date:** 2026-03-15
+**Link:** [LeetCode](https://leetcode.com/problems/valid-parentheses/)
 
 ---
 
 ## Problem Summary
 
-> *One or two sentences describing the problem.*
+> Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if: Open brackets must be closed by the same type of brackets. Open brackets must be closed in the correct order. Every close bracket has a corresponding open bracket of the same type.
 
 **Example:**
 ```
-Input:
-Output:
+Input: s = "()"
+Output: true
+
+Input: s = "()[]{}"
+Output: true
 ```
 
 **Constraints:**
--
+- `1 <= s.length <= 104`
+- `s consists of parentheses only '()[]{}'.`
 
 ---
 
@@ -44,22 +48,19 @@ Key observations:
 ## Solution (Java)
 
 ```java
-public class NNNN_ProblemTitle {
+public class Solution_0020_ValidParentheses {
 
-    public static int[] solve(int[] nums) {
+    public static void solve() {
         // TODO: implement
-        return new int[]{};
     }
 
     // ── Quick local test ─────────────────────────────────────────────────────
     public static void main(String[] args) {
         // Test case 1
-        System.out.println(java.util.Arrays.toString(solve(new int[]{1, 2, 3})));
-        // Expected: [...]
+        // Expected:
 
         // Test case 2 – edge case
-        System.out.println(java.util.Arrays.toString(solve(new int[]{})));
-        // Expected: []
+        // Expected:
     }
 }
 ```
@@ -74,7 +75,6 @@ public class NNNN_ProblemTitle {
 - [ ] Single element
 - [ ] All duplicates
 - [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
 
 ---
 
@@ -89,6 +89,6 @@ public class NNNN_ProblemTitle {
 ## Second Pass *(optional – Python)*
 
 ```python
-def solve(nums: list[int]) -> list[int]:
+def solve():
     pass
 ```

@@ -3,6 +3,7 @@
 **Difficulty:** Easy
 **Tags:** `Array` `Hash Map`
 **Date:** 2026-03-14
+**Link:** [LeetCode](https://leetcode.com/problems/two-sum/)
 
 ---
 
