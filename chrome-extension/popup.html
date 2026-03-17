@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LC Notes</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header>
+      <span class="logo">LC Notes</span>
+      <button id="btn-settings" title="Settings" aria-label="Open settings">⚙</button>
+    </header>
+
+    <!-- Problem card (shown when on a LeetCode problem page) -->
+    <section id="card-problem" class="hidden">
+      <div id="problem-meta">
+        <span id="problem-id" class="dim">#0000</span>
+        <span id="problem-difficulty" class="badge">–</span>
+      </div>
+      <h2 id="problem-title">Loading…</h2>
+      <div id="problem-tags"></div>
+      <button id="btn-create" class="btn-primary" disabled>
+        Fetch &amp; Create Note
+      </button>
+      <div id="status" class="hidden"></div>
+      <a id="link-note" class="hidden" target="_blank" rel="noopener">View on GitHub ↗</a>
+    </section>
+
+    <!-- Not on a problem page -->
+    <section id="card-idle" class="hidden">
+      <p class="muted">Open a LeetCode problem<br>page to create a note.</p>
+      <a href="https://leetcode.com/problemset/" target="_blank" rel="noopener" class="btn-secondary">
+        Browse problems ↗
+      </a>
+    </section>
+
+    <!-- Settings not configured -->
+    <section id="card-setup" class="hidden">
+      <p class="muted">Configure your GitHub repo first.</p>
+      <button id="btn-go-settings" class="btn-primary">Open Settings</button>
+    </section>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

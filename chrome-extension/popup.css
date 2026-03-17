@@ -1,0 +1,154 @@
+/* ── Reset & base ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  background: #0f0f0f;
+  color: #e0e0e0;
+  width: 280px;
+  min-height: 140px;
+}
+
+#app { display: flex; flex-direction: column; }
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffa116; /* LeetCode orange */
+}
+
+#btn-settings {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+#btn-settings:hover { color: #e0e0e0; }
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+section {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hidden { display: none !important; }
+
+/* ── Problem card ────────────────────────────────────────────────────────── */
+#problem-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dim { color: #666; font-size: 12px; }
+
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #222;
+  color: #888;
+}
+.badge.Easy   { background: #1a3a2a; color: #2cbb5d; }
+.badge.Medium { background: #3a2e10; color: #ffa116; }
+.badge.Hard   { background: #3a1a1a; color: #ef4743; }
+
+#problem-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+#problem-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 0;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #1c1c1c;
+  color: #999;
+  border: 1px solid #333;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: #ffa116;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  text-align: center;
+}
+.btn-primary:hover:not(:disabled) { background: #ffb84d; }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-secondary {
+  display: inline-block;
+  background: #1c1c1c;
+  color: #ccc;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+.btn-secondary:hover { border-color: #666; }
+
+/* ── Status bar ──────────────────────────────────────────────────────────── */
+#status {
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #1c1c1c;
+  border: 1px solid #333;
+  line-height: 1.4;
+}
+#status.ok    { border-color: #2cbb5d; color: #2cbb5d; }
+#status.error { border-color: #ef4743; color: #ef4743; }
+#status.info  { border-color: #3a8eff; color: #3a8eff; }
+
+/* ── Link ────────────────────────────────────────────────────────────────── */
+#link-note {
+  font-size: 12px;
+  color: #3a8eff;
+  text-decoration: none;
+  text-align: center;
+}
+#link-note:hover { text-decoration: underline; }
+
+/* ── Idle / setup cards ──────────────────────────────────────────────────── */
+.muted {
+  color: #666;
+  text-align: center;
+  line-height: 1.6;
+  padding: 8px 0;
+}

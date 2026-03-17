@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LC Notes – Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1><span class="orange">LC Notes</span> — Settings</h1>
+      <p class="sub">Your notes are pushed directly to GitHub via the API. Nothing is stored on any server.</p>
+    </header>
+
+    <form id="settings-form">
+
+      <section>
+        <h2>GitHub</h2>
+
+        <label for="token">
+          Personal Access Token
+          <span class="hint">
+            Needs <code>repo</code> scope →
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=LC+Notes+Extension" target="_blank" rel="noopener">Generate</a>
+          </span>
+        </label>
+        <input type="password" id="token" name="token" placeholder="ghp_…" autocomplete="off" required />
+
+        <label for="owner">GitHub Username (repo owner)</label>
+        <input type="text" id="owner" name="owner" placeholder="your-username" required />
+
+        <label for="repo">Repository Name</label>
+        <input type="text" id="repo" name="repo" placeholder="My-LC-Notes" required />
+
+        <label for="branch">Branch <span class="hint">default: main</span></label>
+        <input type="text" id="branch" name="branch" placeholder="main" />
+
+        <label for="folder">Solutions folder <span class="hint">default: solutions</span></label>
+        <input type="text" id="folder" name="folder" placeholder="solutions" />
+      </section>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary">Save Settings</button>
+        <button type="button" id="btn-test" class="btn-secondary">Test Connection</button>
+      </div>
+
+      <div id="status" class="hidden"></div>
+
+    </form>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
