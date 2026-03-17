@@ -28,10 +28,10 @@ Output: true
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Stack*
 
 Key observations:
--
+- 
 -
 
 ---
@@ -50,9 +50,26 @@ Key observations:
 ```java
 public class Solution_0020_ValidParentheses {
 
-    public static void solve() {
-        // TODO: implement
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            // Push the expected closing bracket
+            if (c == '(') stack.push(')');
+            else if (c == '{') stack.push('}');
+            else if (c == '[') stack.push(']');
+            else {
+                // c is a closing bracket
+                if (stack.isEmpty() || stack.pop() != c) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty(); // valid only if nothing left unmatched
     }
+}
 
     // ── Quick local test ─────────────────────────────────────────────────────
     public static void main(String[] args) {
@@ -64,8 +81,6 @@ public class Solution_0020_ValidParentheses {
     }
 }
 ```
-
-> **To run:** right-click the file in VS Code → *Run Java*, or use the ▶ button above the `main` method (requires the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
 
 ---
 
