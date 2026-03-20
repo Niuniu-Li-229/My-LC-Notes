@@ -1,17 +1,17 @@
-# 0146.LRU Cache
+# 0146. LRU Cache
 
 **Difficulty:** Medium
 **Tags:** `Hash Table` `Linked List` `Design` `Doubly-Linked List`
-**Date:** 2026-03-19
+**Date:** 2026-03-20
 **Link:** [LeetCode](https://leetcode.com/problems/lru-cache/)
 
 ---
 
 ## Problem Summary
 
-> Design a data structure that follows the constraints of a Least Recently Used (LRU) cache. Implement the LRUCache class: LRUCache(int capacity) Initialize the LRU cache with positive size capacity. int get(int key) Return the value of the key if the key exists, otherwise return -1. void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key. The functions get and put must each run in O(1) average time complexity.
+> Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
 
-**Example:**
+**Example 1:**
 ```
 Input
 ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
@@ -33,10 +33,10 @@ lRUCache.get(4);    // return 4
 ```
 
 **Constraints:**
-- `1 <= capacity <= 3000`
-- `0 <= key <= 104`
-- `0 <= value <= 105`
-- `At most 2 * 105 calls will be made to get and put.`
+- 1 <= capacity <= 3000
+- 0 <= key <= 104
+- 0 <= value <= 105
+- At most 2 * 105 calls will be made to get and put.
 
 ---
 
@@ -64,22 +64,39 @@ Key observations:
 ```java
 public class Solution_0146_LRUCache {
 
-    public static void solve() {
-        // TODO: implement
+    class LRUCache {
+    
+        public LRUCache(int capacity) {
+            
+        }
+        
+        public int get(int key) {
+            
+        }
+        
+        public void put(int key, int value) {
+            
+        }
     }
+    
+    /**
+     * Your LRUCache object will be instantiated and called as such:
+     * LRUCache obj = new LRUCache(capacity);
+     * int param_1 = obj.get(key);
+     * obj.put(key,value);
+     */
 
     // ── Quick local test ─────────────────────────────────────────────────────
     public static void main(String[] args) {
+        Solution_0146_LRUCache sol = new Solution_0146_LRUCache();
         // Test case 1
-        // Expected:
-
-        // Test case 2 – edge case
-        // Expected:
+        // System.out.println(sol.methodName(...));
+        // Expected: ...
     }
 }
 ```
 
-> **To run:** right-click the file in VS Code → *Run Java*, or use the ▶ button above the `main` method (requires the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
+> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
 
 ---
 
@@ -89,6 +106,7 @@ public class Solution_0146_LRUCache {
 - [ ] Single element
 - [ ] All duplicates
 - [ ] Negative numbers / overflow
+- [ ] Already sorted / reverse sorted
 
 ---
 
@@ -103,6 +121,6 @@ public class Solution_0146_LRUCache {
 ## Second Pass *(optional – Python)*
 
 ```python
-def solve():
+def solve(self) -> None:
     pass
 ```
