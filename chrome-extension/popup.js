@@ -16,6 +16,57 @@ query questionData($titleSlug: String!) {
   }
 }`;
 
+const SUBMISSION_LIST_QUERY = `
+query submissionList($questionSlug: String!, $offset: Int!, $limit: Int!) {
+  questionSubmissionList(questionSlug: $questionSlug, offset: $offset, limit: $limit, status: 10) {
+    submissions {
+      id
+      lang
+      statusDisplay
+    }
+  }
+}`;
+
+const SUBMISSION_DETAIL_QUERY = `
+query submissionDetails($submissionId: Int!) {
+  submissionDetails(submissionId: $submissionId) {
+    code
+    lang { verboseName }
+  }
+}`;
+
+async function fetchLatestAcceptedCode(slug, preferredLang = "java") {
+  const listRes = await fetch(LC_GRAPHQL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: SUBMISSION_LIST_QUERY,
+      variables: { questionSlug: slug, offset: 0, limit: 20 },
+    }),
+  });
+  if (!listRes.ok) return null;
+  const listJson = await listRes.json();
+  const submissions = listJson.data?.questionSubmissionList?.submissions || [];
+
+  // Pick latest accepted submission in preferred language, fall back to any accepted
+  const match =
+    submissions.find((s) => s.lang === preferredLang) ||
+    submissions[0];
+  if (!match) return null;
+
+  const detailRes = await fetch(LC_GRAPHQL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: SUBMISSION_DETAIL_QUERY,
+      variables: { submissionId: parseInt(match.id, 10) },
+    }),
+  });
+  if (!detailRes.ok) return null;
+  const detailJson = await detailRes.json();
+  return detailJson.data?.submissionDetails?.code || null;
+}
+
 async function fetchProblem(slug) {
   const res = await fetch(LC_GRAPHQL, {
     method: "POST",
@@ -134,7 +185,7 @@ function titleToFilename(id, title) {
 
 // ── Markdown generator ────────────────────────────────────────────────────
 
-function generateMarkdown(problem) {
+function generateMarkdown(problem, userCode = null) {
   const { questionFrontendId: id, title, titleSlug, difficulty, topicTags, content, codeSnippets } = problem;
 
   const tags       = topicTags.map((t) => `\`${t.name}\``).join(" ");
@@ -143,7 +194,7 @@ function generateMarkdown(problem) {
   const examples   = extractExamples(content);
   const constraints = extractConstraints(content);
   const javaSnippet = (codeSnippets || []).find((s) => s.langSlug === "java")?.code || "";
-  const javaSkeleton = buildJavaSkeleton(id, title, javaSnippet);
+  const javaSkeleton = userCode || buildJavaSkeleton(id, title, javaSnippet);
 
   const examplesBlock = examples.length
     ? examples.map((ex, i) => `**Example ${i + 1}:**\n\`\`\`\n${ex}\n\`\`\``).join("\n\n")
@@ -233,28 +284,37 @@ function generateMarkdown(problem) {
 
 // ── GitHub API ────────────────────────────────────────────────────────────
 
+async function fileExists({ token, owner, repo, branch }, path) {
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`,
+    { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
+  );
+  return res.ok;
+}
+
+async function resolveFilename(cfg, folder, filename) {
+  const base = filename.replace(/\.md$/, "");
+  const path = `${folder.replace(/\/$/, "")}/${filename}`;
+  if (!(await fileExists(cfg, path))) return filename;
+
+  for (let n = 2; n <= 99; n++) {
+    const candidate = `${base}_${String(n).padStart(3, "0")}.md`;
+    const candidatePath = `${folder.replace(/\/$/, "")}/${candidate}`;
+    if (!(await fileExists(cfg, candidatePath))) return candidate;
+  }
+  throw new Error("Too many attempts for this problem");
+}
+
 async function pushToGitHub({ token, owner, repo, branch, folder }, filename, content) {
-  const path    = `${folder.replace(/\/$/, "")}/${filename}`;
+  const resolvedFilename = await resolveFilename({ token, owner, repo, branch }, folder, filename);
+  const path    = `${folder.replace(/\/$/, "")}/${resolvedFilename}`;
   const apiUrl  = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
   const encoded = btoa(unescape(encodeURIComponent(content)));
 
-  // Check if file already exists (to get its sha for update)
-  let sha;
-  try {
-    const check = await fetch(apiUrl, {
-      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
-    });
-    if (check.ok) {
-      const existing = await check.json();
-      sha = existing.sha;
-    }
-  } catch (_) { /* file doesn't exist yet */ }
-
   const body = {
-    message: `Add note: ${filename.replace(".md", "").replace(/_/g, " ")}`,
+    message: `Add note: ${resolvedFilename.replace(".md", "").replace(/_/g, " ")}`,
     content: encoded,
     branch,
-    ...(sha ? { sha } : {}),
   };
 
   const res = await fetch(apiUrl, {
@@ -347,8 +407,11 @@ function showCard(name) {
     $("btn-create").disabled = true;
     $("link-note").classList.add("hidden");
 
+    showStatus("Fetching your solution…", "info");
+    const userCode = await fetchLatestAcceptedCode(slug).catch(() => null);
+
     showStatus("Generating markdown…", "info");
-    const markdown = generateMarkdown(problem);
+    const markdown = generateMarkdown(problem, userCode);
     const filename = titleToFilename(problem.questionFrontendId, problem.title);
 
     showStatus("Pushing to GitHub…", "info");
