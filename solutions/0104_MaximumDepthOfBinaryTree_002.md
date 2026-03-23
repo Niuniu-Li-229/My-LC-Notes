@@ -31,11 +31,10 @@ Output: 2
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Iterative DFS*
 
 Key observations:
--
--
+- Mimics recursive DFS without risk of StackOverflowError. Uses a stack of (node, currentDepth) pairs.
 
 ---
 
@@ -43,8 +42,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(n) |
 
 ---
 
@@ -95,31 +94,11 @@ class Solution {
 }
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
 ---
 
 ## Notes
 
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
+- *This approach is better because using recursion may have StackOverFlow problem*
+- *In most interviews, BFS wins on clarity. The level-counting pattern maps directly to the problem statement and is immediately readable by any engineer.*
 
 ---
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
-```
