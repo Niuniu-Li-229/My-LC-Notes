@@ -31,10 +31,11 @@ Output: 2
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Recursive DFS*
 
 Key observations:
--
+- Base case: if a node is null, its depth is 0
+- Recursive case: depth of a tree = 1 + the depth of it's right branch or the depth of it's left branch, whichever is longer.
 -
 
 ---
@@ -43,8 +44,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(h) : h is the height of the tree, with balanced tree, O(log(n)); with degenerate tree, O(n) |
 
 ---
 
@@ -79,8 +80,6 @@ class Solution {
 
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
 ---
 
 ## Edge Cases
@@ -95,15 +94,9 @@ class Solution {
 
 ## Notes
 
-- *Why this approach over brute force / alternatives?*
+- * For recursive steps: 1. think about base case; 2. think about what to do in the recursive step*
 - *Common pitfall to remember:*
-- *Pattern this belongs to:*
+- *Pattern this belongs to: DFS*
 
 ---
 
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
-```
