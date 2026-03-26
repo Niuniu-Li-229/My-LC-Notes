@@ -2,7 +2,7 @@
 
 **Difficulty:** Easy
 **Tags:** `Linked List` `Recursion`
-**Date:** 2026-03-26
+**Date:** 2026-03-25
 **Link:** [LeetCode](https://leetcode.com/problems/merge-two-sorted-lists/)
 
 ---
@@ -37,11 +37,10 @@ Output: [0]
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Recursion*
 
 Key observations:
--
--
+- First pick the smallest node; then recursively merge the rest of the lists; last attach the result to the chosen node.
 
 ---
 
@@ -49,8 +48,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(m+n) |
+| **Space** | O(m+n) |
 
 ---
 
@@ -88,31 +87,10 @@ class Solution {
 }
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
----
 
 ## Notes
 
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
+- Remember to check the empty list
+
 
 ---
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
-```
