@@ -37,11 +37,10 @@ Output: []
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Iterative*
 
 Key observations:
--
--
+- The entire trick is three pointer variables — prev, curr, and a temporary next — marching through the list one node at a time. 
 
 ---
 
@@ -49,8 +48,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(1) |
 
 ---
 
@@ -84,31 +83,15 @@ class Solution {
 }
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
 ---
 
 ## Notes
 
-- *Why this approach over brute force / alternatives?*
+- *Why this approach over recursion? *
+- For a list of one million nodes, the recursive version will blow the JVM stack with a StackOverflowError.
+
 - *Common pitfall to remember:*
-- *Pattern this belongs to:*
+- Forgetting to save next before overwriting curr.next
+- Returning curr instead of prev at the end
+- Initializing prev = head instead of prev = null
 
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
-```
