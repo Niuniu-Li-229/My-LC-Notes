@@ -87,8 +87,9 @@ class Solution {
 
 ## Notes
 
-- *Why this approach over recursion? *
+- *Why this approach over recursion?*
 - For a list of one million nodes, the recursive version will blow the JVM stack with a StackOverflowError.
+
 
 - *Common pitfall to remember:*
 - Forgetting to save next before overwriting curr.next
