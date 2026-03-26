@@ -37,10 +37,15 @@ Output: []
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Recursion*
 
 Key observations:
--
+- If the list is empty, return null.
+- Recursively call the function on head.next to reverse the rest of the list.
+- After the recursive call returns:
+- Make head.next.next = head so the next node points back to the current node.
+- Set head.next = null to avoid cycles.
+- Return the new head returned by the deepest recursive call.
 -
 
 ---
@@ -49,8 +54,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(n) |
 
 ---
 
@@ -84,32 +89,12 @@ class Solution {
     }
 }
 ```
-
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
 ---
 
 ## Notes
 
-- *Why this approach over brute force / alternatives?*
 - *Common pitfall to remember:*
-- *Pattern this belongs to:*
+- Not handling the empty list; Not initialzing an empty list to start; not making head.next.next = head, aka not changing the 3rd pointer to last head; not making head.next = null, aka not avoiding cycles 
 
 ---
 
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
-```
