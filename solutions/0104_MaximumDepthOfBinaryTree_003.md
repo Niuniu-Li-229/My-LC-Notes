@@ -1,0 +1,111 @@
+# 0104. Maximum Depth of Binary Tree
+
+**Difficulty:** Easy
+**Tags:** `Tree` `Depth-First Search` `Breadth-First Search` `Binary Tree`
+**Date:** 2026-05-01
+**Link:** [LeetCode](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+
+---
+
+## Problem Summary
+
+> Given the root of a binary tree, return its maximum depth.
+
+**Example 1:**
+```
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+```
+
+**Example 2:**
+```
+Input: root = [1,null,2]
+Output: 2
+```
+
+**Constraints:**
+- The number of nodes in the tree is in the range [0, 104].
+- -100 <= Node.val <= 100
+
+---
+
+## Approach
+
+**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+
+Key observations:
+-
+-
+
+---
+
+## Complexity
+
+| | |
+|---|---|
+| **Time** | O(?) |
+| **Space** | O(?) |
+
+---
+
+## Solution (Java)
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int maxDepth(TreeNode root) {
+
+        if (root==null){
+            return 0;
+        }
+
+        int leftDepth  = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+}
+```
+
+> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
+
+---
+
+## Edge Cases
+
+- [ ] Empty input / null
+- [ ] Single element
+- [ ] All duplicates
+- [ ] Negative numbers / overflow
+- [ ] Already sorted / reverse sorted
+
+---
+
+## Notes
+
+- *Why this approach over brute force / alternatives?*
+- *Common pitfall to remember:*
+- *Pattern this belongs to:*
+
+---
+
+## Second Pass *(optional – Python)*
+
+```python
+def solve(self) -> None:
+    pass
+```
