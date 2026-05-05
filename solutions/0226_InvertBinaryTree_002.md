@@ -37,11 +37,7 @@ Output: []
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
-
-Key observations:
--
--
+**Strategy:** *Recursive*
 
 ---
 
@@ -49,8 +45,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(n) |
 
 ---
 
@@ -85,31 +81,44 @@ class Solution {
 }
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
 ---
 
 ## Notes
 
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
+- *There are dangerous variant: should not recurse into root.right before saving it. Better to assign it to a value first and then recurse*
+- *Better coding as:*
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null){
+            return root;
+        }
 
----
+        //Step 1: swap children (plain variable swap, no recursion yet)
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
 
-## Second Pass *(optional – Python)*
+        // Step2: recurse into alreay-swapped children
+        invertTree(root.left);
+        invertTree(root.right);
 
-```python
-def solve(self) -> None:
-    pass
+        return root;
+    }
+}
 ```
