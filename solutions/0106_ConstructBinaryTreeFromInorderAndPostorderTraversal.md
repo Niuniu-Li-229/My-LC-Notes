@@ -32,11 +32,11 @@ Output: [-1]
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *DFS + Recursion*
 
 Key observations:
--
--
+- Similar to LC 105 - Construct Binary Tree from Preorder and Inorder Traversal
+- Becareful about the array index
 
 ---
 
@@ -44,8 +44,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n^2) |
+| **Space** | O(n) |
 
 ---
 
@@ -94,33 +94,4 @@ class Solution {
     }
 
 }
-```
-
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
----
-
-## Notes
-
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
-
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
 ```
