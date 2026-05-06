@@ -32,11 +32,15 @@ Output: [-1]
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *DFS + Resursion*
 
-Key observations:
--
--
+Algorithm:
+- If either array is empty, return null (base case).
+- Create a root node with the first element of preorder.
+- Find the index of the root value in inorder (call it mid).
+- Recursively build the left subtree using preorder[1:mid+1] and inorder[0:mid].
+- Recursively build the right subtree using preorder[mid+1:] and inorder[mid+1:].
+- Return the root node.
 
 ---
 
@@ -44,8 +48,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n^2) |
+| **Space** | O(n) |
 
 ---
 
@@ -93,33 +97,4 @@ class Solution {
         return root;
     }
 }
-```
-
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
----
-
-## Notes
-
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
-
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
 ```
