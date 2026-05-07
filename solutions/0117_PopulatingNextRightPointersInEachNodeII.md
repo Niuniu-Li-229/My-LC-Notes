@@ -32,11 +32,18 @@ Output: []
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *BFS*
 
-Key observations:
--
--
+Algorithm:
+1. If the `root` is `null`, return `null`.
+2. Initialize a queue with the `root`.
+3. While the queue is not empty:
+   - Record the current level size.
+   - For each node in the current level:
+         - Dequeue the node.
+         - If it's not the last node in the level, set its `next` pointer to the front of the queue.
+         - Enqueue its `left` and `right` children if they exist.
+4. Return the root.
 
 ---
 
@@ -44,8 +51,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(logn) |
 
 ---
 
@@ -105,31 +112,3 @@ class Solution {
 }
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
----
-
-## Notes
-
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
-
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
-```
