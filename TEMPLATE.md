@@ -84,11 +84,3 @@ public class NNNN_ProblemTitle {
 - *Common pitfall to remember:*
 - *Pattern this belongs to:*
 
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(nums: list[int]) -> list[int]:
-    pass
-```
