@@ -33,24 +33,28 @@ Output: 2
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Array/Boyer-Moore Voting*
 
 Key observations:
--
--
+- My initial solution can handle in O(n)
+- If we want O(n) time, O(1) space, we will need Boyer-Moore Voting:
+  - *Intuition*: if a majority element exists (appears > n/2 times),
+  - then if you pair up every occurence of the majority element with one non-majority element and cancel them out,
+  - the majority element will still have at least one left at the end.
 
 ---
 
 ## Complexity
 
-| | |
-|---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+HashMap:
+|  | **Time** | **Space** |
+|---|---|---|
+| **HashMap** | O(n) | O(n) |
+| **Boyer-Moore Voting** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (Java - HashMap)
 
 ```java
 class Solution {
@@ -81,31 +85,22 @@ class Solution {
 }
 ```
 
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
 ---
+## Solution (Java - Boyer-Moore Voting)
 
-## Edge Cases
 
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
+```Java
+public int majorityElement(int[] nums) {
+    int candidate = nums[0];
+    int count = 0;
 
----
+    for (int num : nums) {
+        if (count == 0) {
+            candidate = num;
+        }
+        count += (num == candidate) ? 1 : -1;
+    }
 
-## Notes
-
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
-
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
+    return candidate;
+}
 ```
