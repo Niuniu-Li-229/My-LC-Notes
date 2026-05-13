@@ -41,11 +41,17 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Recursion*
 
 Key observations:
--
--
+- A helper method is needed.
+- DFS Recursion:
+  - Define a recursive `dfs` function that takes the current node and the accumulated number so far.
+  - Base 1: if current node is null, return 0;
+  - Update the accumulated number `num = 10*num + node.val`
+  - Base 2: if current node is a leaf (no children), return the accumulated number
+  - Otherwise, recursively process both children and return the sum of their results.
+  - start the `dfs` from the root with an initial number of `0`
 
 ---
 
@@ -53,8 +59,8 @@ Key observations:
 
 | | |
 |---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+| **Time** | O(n) |
+| **Space** | O(h) |
 
 ---
 
@@ -92,33 +98,4 @@ class Solution {
         return dfs(node.left, num) + dfs(node.right, num);
     }
 }
-```
-
-> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-- [ ] Already sorted / reverse sorted
-
----
-
-## Notes
-
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
-
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve(self) -> None:
-    pass
 ```
