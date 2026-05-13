@@ -1,24 +1,23 @@
-# [NNNN]. [Problem Title]
+# {{NUM}}. {{TITLE}}
 
-**Difficulty:** Easy / Medium / Hard
-**Tags:** `Array` `Two Pointers` `Hash Map` *(replace with actual tags)*
-**Date:** YYYY-MM-DD
-**Link:** [LeetCode](https://leetcode.com/problems/problem-slug/)
+**Difficulty:** {{DIFFICULTY}}
+**Tags:** {{TAGS}}
+**Date:** {{DATE}}
+**Link:** [LeetCode]({{LINK}})
 
 ---
 
 ## Problem Summary
 
-> *One or two sentences describing the problem.*
+> {{SUMMARY}}
 
 **Example:**
 ```
-Input:
-Output:
+{{EXAMPLES}}
 ```
 
 **Constraints:**
--
+{{CONSTRAINTS}}
 
 ---
 
@@ -34,34 +33,17 @@ Key observations:
 
 ## Complexity
 
-| | |
-|---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
+|  | **Time** | **Space** |
+|---|---|---|
+| **Approach 1** | O(?) | O(?) |
+| **Approach 2** | O(?) | O(?) |
 
 ---
 
 ## Solution (Java)
 
 ```java
-public class NNNN_ProblemTitle {
-
-    public static int[] solve(int[] nums) {
-        // TODO: implement
-        return new int[]{};
-    }
-
-    // ── Quick local test ─────────────────────────────────────────────────────
-    public static void main(String[] args) {
-        // Test case 1
-        System.out.println(java.util.Arrays.toString(solve(new int[]{1, 2, 3})));
-        // Expected: [...]
-
-        // Test case 2 – edge case
-        System.out.println(java.util.Arrays.toString(solve(new int[]{})));
-        // Expected: []
-    }
-}
+{{JAVA_SKELETON}}
 ```
 
 > **To run:** right-click the file in VS Code → *Run Java*, or use the ▶ button above the `main` method (requires the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).

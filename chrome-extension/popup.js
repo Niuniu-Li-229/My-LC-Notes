@@ -183,103 +183,92 @@ function titleToFilename(id, title) {
   return `${paddedId}_${safeName}.md`;
 }
 
-// ── Markdown generator ────────────────────────────────────────────────────
+// ── Template fetch + markdown generator ───────────────────────────────────
 
-function generateMarkdown(problem, userCode = null) {
+// Minimal inline fallback used only if fetching TEMPLATE.md from GitHub fails
+// (offline, file renamed/deleted, bad token, etc.). Kept tiny on purpose —
+// the real template lives in the repo.
+const FALLBACK_TEMPLATE = `# {{NUM}}. {{TITLE}}
+
+**Difficulty:** {{DIFFICULTY}}
+**Tags:** {{TAGS}}
+**Date:** {{DATE}}
+**Link:** [LeetCode]({{LINK}})
+
+---
+
+## Problem Summary
+
+> {{SUMMARY}}
+
+**Example:**
+\`\`\`
+{{EXAMPLES}}
+\`\`\`
+
+**Constraints:**
+{{CONSTRAINTS}}
+
+---
+
+## Solution (Java)
+
+\`\`\`java
+{{JAVA_SKELETON}}
+\`\`\`
+`;
+
+async function fetchTemplate({ token, owner, repo, branch }) {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/TEMPLATE.md?ref=${branch}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+  });
+  if (!res.ok) throw new Error(`TEMPLATE.md fetch failed (${res.status})`);
+  const json = await res.json();
+  const b64 = (json.content || "").replace(/\s/g, "");
+  const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+  return new TextDecoder("utf-8").decode(bytes);
+}
+
+function generateMarkdown(template, problem, userCode = null) {
   const { questionFrontendId: id, title, titleSlug, difficulty, topicTags, content, codeSnippets } = problem;
 
-  const tags       = topicTags.map((t) => `\`${t.name}\``).join(" ");
-  const date       = new Date().toISOString().slice(0, 10);
-  const summary    = extractSummary(content);
-  const examples   = extractExamples(content);
+  const num         = String(id).padStart(4, "0");
+  const className   = `Solution_${num}_${titleToClassName(title)}`;
+  const tags        = topicTags.map((t) => `\`${t.name}\``).join(" ");
+  const date        = new Date().toISOString().slice(0, 10);
+  const summary     = extractSummary(content);
+  const examples    = extractExamples(content);
   const constraints = extractConstraints(content);
   const javaSnippet = (codeSnippets || []).find((s) => s.langSlug === "java")?.code || "";
   const javaSkeleton = userCode || buildJavaSkeleton(id, title, javaSnippet);
 
-  const examplesBlock = examples.length
-    ? examples.map((ex, i) => `**Example ${i + 1}:**\n\`\`\`\n${ex}\n\`\`\``).join("\n\n")
-    : "**Example:**\n```\nInput:\nOutput:\n```";
-
+  const examplesBlock = examples.length ? examples.join("\n\n") : "Input:\nOutput:";
   const constraintsBlock = constraints.length
     ? constraints.map((c) => `- ${c}`).join("\n")
     : "-";
 
-  return [
-    `# ${String(id).padStart(4, "0")}. ${title}`,
-    "",
-    `**Difficulty:** ${difficulty}`,
-    `**Tags:** ${tags}`,
-    `**Date:** ${date}`,
-    `**Link:** [LeetCode](https://leetcode.com/problems/${titleSlug}/)`,
-    "",
-    "---",
-    "",
-    "## Problem Summary",
-    "",
-    `> ${summary}`,
-    "",
-    examplesBlock,
-    "",
-    "**Constraints:**",
-    constraintsBlock,
-    "",
-    "---",
-    "",
-    "## Approach",
-    "",
-    "**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*",
-    "",
-    "Key observations:",
-    "-",
-    "-",
-    "",
-    "---",
-    "",
-    "## Complexity",
-    "",
-    "| | |",
-    "|---|---|",
-    "| **Time** | O(?) |",
-    "| **Space** | O(?) |",
-    "",
-    "---",
-    "",
-    "## Solution (Java)",
-    "",
-    "```java",
-    javaSkeleton,
-    "```",
-    "",
-    "> **To run:** use the ▶ button above `main` in VS Code (requires [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).",
-    "",
-    "---",
-    "",
-    "## Edge Cases",
-    "",
-    "- [ ] Empty input / null",
-    "- [ ] Single element",
-    "- [ ] All duplicates",
-    "- [ ] Negative numbers / overflow",
-    "- [ ] Already sorted / reverse sorted",
-    "",
-    "---",
-    "",
-    "## Notes",
-    "",
-    "- *Why this approach over brute force / alternatives?*",
-    "- *Common pitfall to remember:*",
-    "- *Pattern this belongs to:*",
-    "",
-    "---",
-    "",
-    "## Second Pass *(optional – Python)*",
-    "",
-    "```python",
-    "def solve(self) -> None:",
-    "    pass",
-    "```",
-    "",
-  ].join("\n");
+  // Order matters: JAVA_SKELETON before CLASS_NAME so the skeleton text gets
+  // injected first, then any {{CLASS_NAME}} placeholder inside it is resolved.
+  const replacements = [
+    ["{{JAVA_SKELETON}}", javaSkeleton],
+    ["{{NUM}}", num],
+    ["{{TITLE}}", title],
+    ["{{DIFFICULTY}}", difficulty],
+    ["{{TAGS}}", tags],
+    ["{{DATE}}", date],
+    ["{{LINK}}", `https://leetcode.com/problems/${titleSlug}/`],
+    ["{{SUMMARY}}", summary],
+    ["{{EXAMPLES}}", examplesBlock],
+    ["{{CONSTRAINTS}}", constraintsBlock],
+    ["{{CLASS_NAME}}", className],
+  ];
+
+  let result = template;
+  for (const [token, value] of replacements) {
+    result = result.split(token).join(value);
+  }
+  return result;
 }
 
 // ── GitHub API ────────────────────────────────────────────────────────────
@@ -407,11 +396,20 @@ function showCard(name) {
     $("btn-create").disabled = true;
     $("link-note").classList.add("hidden");
 
+    showStatus("Fetching template…", "info");
+    let template;
+    try {
+      template = await fetchTemplate(cfg);
+    } catch (err) {
+      console.warn("TEMPLATE.md fetch failed, using fallback:", err);
+      template = FALLBACK_TEMPLATE;
+    }
+
     showStatus("Fetching your solution…", "info");
     const userCode = await fetchLatestAcceptedCode(slug).catch(() => null);
 
     showStatus("Generating markdown…", "info");
-    const markdown = generateMarkdown(problem, userCode);
+    const markdown = generateMarkdown(template, problem, userCode);
     const filename = titleToFilename(problem.questionFrontendId, problem.title);
 
     showStatus("Pushing to GitHub…", "info");

@@ -15,11 +15,34 @@ import sys
 import json
 import re
 from datetime import date
+from pathlib import Path
 from urllib.request import urlopen, Request
 from urllib.error import URLError
 
 GRAPHQL_URL = "https://leetcode.com/graphql"
+SCRIPT_DIR = Path(__file__).resolve().parent
+TEMPLATE_PATH = SCRIPT_DIR / "TEMPLATE.md"
 SOLUTIONS_DIR = "solutions"
+
+DEFAULT_JAVA_SKELETON = """\
+public class {{CLASS_NAME}} {
+
+    public static int[] solve(int[] nums) {
+        // TODO: implement
+        return new int[]{};
+    }
+
+    // ── Quick local test ─────────────────────────────────────────────────────
+    public static void main(String[] args) {
+        // Test case 1
+        System.out.println(java.util.Arrays.toString(solve(new int[]{1, 2, 3})));
+        // Expected: [...]
+
+        // Test case 2 – edge case
+        System.out.println(java.util.Arrays.toString(solve(new int[]{})));
+        // Expected: []
+    }
+}"""
 
 QUERY = """
 query getQuestion($titleSlug: String!) {
@@ -156,97 +179,27 @@ def build_note(q: dict, slug: str) -> str:
     else:
         constraints_block = "-"
 
-    return f"""\
-# {num}.{title}
+    try:
+        template = TEMPLATE_PATH.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        sys.exit(f"Template not found: {TEMPLATE_PATH}")
 
-**Difficulty:** {difficulty}
-**Tags:** {tags}
-**Date:** {today}
-**Link:** [LeetCode]({link})
-
----
-
-## Problem Summary
-
-> {summary}
-
-**Example:**
-```
-{examples}
-```
-
-**Constraints:**
-{constraints_block}
-
----
-
-## Approach
-
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
-
-Key observations:
--
--
-
----
-
-## Complexity
-
-| | |
-|---|---|
-| **Time** | O(?) |
-| **Space** | O(?) |
-
----
-
-## Solution (Java)
-
-```java
-public class {class_name} {{
-
-    public static void solve() {{
-        // TODO: implement
-    }}
-
-    // ── Quick local test ─────────────────────────────────────────────────────
-    public static void main(String[] args) {{
-        // Test case 1
-        // Expected:
-
-        // Test case 2 – edge case
-        // Expected:
-    }}
-}}
-```
-
-> **To run:** right-click the file in VS Code → *Run Java*, or use the ▶ button above the `main` method (requires the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)).
-
----
-
-## Edge Cases
-
-- [ ] Empty input / null
-- [ ] Single element
-- [ ] All duplicates
-- [ ] Negative numbers / overflow
-
----
-
-## Notes
-
-- *Why this approach over brute force / alternatives?*
-- *Common pitfall to remember:*
-- *Pattern this belongs to:*
-
----
-
-## Second Pass *(optional – Python)*
-
-```python
-def solve():
-    pass
-```
-"""
+    replacements = {
+        "{{JAVA_SKELETON}}": DEFAULT_JAVA_SKELETON,
+        "{{NUM}}": num,
+        "{{TITLE}}": title,
+        "{{DIFFICULTY}}": difficulty,
+        "{{TAGS}}": tags,
+        "{{DATE}}": today,
+        "{{LINK}}": link,
+        "{{SUMMARY}}": summary,
+        "{{EXAMPLES}}": examples,
+        "{{CONSTRAINTS}}": constraints_block,
+        "{{CLASS_NAME}}": class_name,
+    }
+    for token, value in replacements.items():
+        template = template.replace(token, value)
+    return template
 
 
 def main():
