@@ -41,11 +41,8 @@ bSTIterator.hasNext(); // return False
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Stack*
 
-Key observations:
--
--
 
 ---
 
@@ -53,8 +50,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Stack** | O(1) | O(n) |
 
 ---
 
