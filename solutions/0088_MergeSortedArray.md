@@ -41,10 +41,10 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Array, Three Pointers?*
 
 Key observations:
--
+- We need three pointers to track the start, update and end of the array
 -
 
 ---
@@ -53,8 +53,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(m+n) | O(1) |
 
 ---
 
