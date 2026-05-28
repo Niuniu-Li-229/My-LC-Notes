@@ -47,11 +47,11 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Bubble Sort*
 
 Key observations:
--
--
+- We can use bubble sort to move the target values to the right of the list
+- Remember to read the lines and check the output requirements. This question only need to return the numbers of the value.
 
 ---
 
@@ -59,14 +59,14 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
+| **Approach 1** | O(n^2) | O(1) |
 | **Approach 2** | O(?) | O(?) |
 
 ---
 
-## Solution (Java)
+## Solution (C)
 
-```java
+```C
 void swap(int *a, int *b) {
   int temp = *a;
   *a = *b;
