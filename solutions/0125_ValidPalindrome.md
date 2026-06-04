@@ -35,11 +35,11 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- We can use .isLetterOrDigit(c) to identify if the character is a letter or digit
+- 
 
 ---
 
@@ -47,8 +47,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Two Pointer** | O(n) | O(1) |
 
 ---
 
