@@ -30,10 +30,10 @@ Output: [3.00000,14.50000,11.00000]
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *BFS*
 
 Key observations:
--
+- common template for BFS
 -
 
 ---
@@ -42,8 +42,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **BFS** | O(n) | O(n) |
 
 ---
 
