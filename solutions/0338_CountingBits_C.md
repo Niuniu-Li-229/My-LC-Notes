@@ -38,10 +38,10 @@ Explanation:
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Dynamic Programming*
 
 Key observations:
--
+- Find the pattern first and easier to code
 -
 
 ---
@@ -50,14 +50,13 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(n) |
 
 ---
 
-## Solution (Java)
+## Solution (C)
 
-```java
+```C
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
