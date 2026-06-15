@@ -33,10 +33,10 @@ Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Recursion / Dynamic Programming*
 
 Key observations:
--
+- Different way for fibonacci number
 -
 
 ---
@@ -45,8 +45,11 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Recursion** | O(2^n) | O(n) |
+| **Memoization DP** | O(n) | O(n) stack + O(n) cache |
+| **Iterative DP** | O(n) | O(n) |
+| **Space Optimized DP** | O(n) | O(1) |
+
 
 ---
 
