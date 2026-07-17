@@ -34,10 +34,10 @@ Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Greedy Algo*
 
 Key observations:
--
+- The condition to move-on
 -
 
 ---
@@ -46,14 +46,13 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (C)
 
-```java
+```C
 int maxSubArray(int* nums, int numsSize) {
     int sum = nums[0];
     int currSum = nums[0];
