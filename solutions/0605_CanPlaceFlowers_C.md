@@ -30,11 +30,10 @@ Output: false
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Greedy Algorithm*
 
 Key observations:
--
--
+- Check both right and left for the optimal best locally
 
 ---
 
@@ -42,14 +41,13 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (C)
 
-```java
+```C
 bool canPlaceFlowers(int* flowerbed, int flowerbedSize, int n) {
     int plant = 0;
 
