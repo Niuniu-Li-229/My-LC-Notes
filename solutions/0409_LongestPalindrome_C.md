@@ -29,11 +29,10 @@ Explanation: The longest palindrome that can be built is "a", whose length is 1.
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *String/Greedy*
 
 Key observations:
--
--
+- Use count[s[i]] to count the freq of characters
 
 ---
 
@@ -41,14 +40,13 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (C)
 
-```java
+```C
 int longestPalindrome(char* s) {
     int count[128] = {0};   // covers all ASCII characters, initialized to 0
     int totalCount = 0;
