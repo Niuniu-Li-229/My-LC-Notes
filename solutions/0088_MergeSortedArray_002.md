@@ -41,11 +41,11 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Bubble Sort / Two Pointers*
 
 Key observations:
--
--
+- My initial approach is to merge the list first and then sort them using bubble sort
+- But Claude gave me hint that since the arrays are already sorted, we can fill from the back and no need to sort
 
 ---
 
@@ -53,12 +53,12 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | $O((m+n)^2)$ | $O(1)$ |
+| **Approach 2** | $O(m+n)$ | $O(1)$ |
 
 ---
 
-## Solution (Java)
+## Solution (Approach 1 - Bubble Sort)
 
 ```java
 class Solution {
@@ -90,5 +90,30 @@ class Solution {
     }
 }
 ```
+
+## Solution (Approach 2 - Two Pointers)
+
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;       // last real element of nums1
+        int j = n - 1;       // last element of nums2
+        int k = m + n - 1;   // last slot of nums1
+
+        while (j >= 0) {
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+                // or can be written as
+                // nums1[k] = nums1[i];
+                // k--;
+                // i--;
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+    }
+}
+```
+
 
 
