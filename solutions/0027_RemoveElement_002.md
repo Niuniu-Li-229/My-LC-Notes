@@ -47,11 +47,12 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- My approach is have two pointers from both ends and swap if value is found.
+- Claude's version is forward fast/slow pointers as i (fast) reads and k (slow) writes. Which keeps the relative order and is easier to verify.
+- Time and space complexity are the same.
 
 ---
 
@@ -59,12 +60,12 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
+| **Approach 2** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (Two pointers from each ends)
 
 ```java
 class Solution {
@@ -84,10 +85,24 @@ class Solution {
                 l ++;
             }
         }
-
         return r+1;
     }
 }
 ```
 
+## Solution (Fast/Slow pointers)
 
+```java
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int k = 0;
+        for (int num : nums) {
+            if (num != val) {
+                nums[k] = num;
+                k++;
+            }
+        }
+        return k;
+    }
+}
+```
