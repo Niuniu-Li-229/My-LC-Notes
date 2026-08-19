@@ -42,11 +42,13 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- Check the base case nums.length <= 2
+- i (fast) read pointer should start at 2, mirroring k, so the write index is ahead of read index.
+- Why `nums[k-2]` is the right comparison: it's the element two back in the compacted prefix.
+- If the incoming value equals it, then combined with `nums[k-1]` (which sortedness forces to be the same value) you'd already have two copies, so a third is one too many.
 
 ---
 
@@ -54,8 +56,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
