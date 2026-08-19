@@ -42,11 +42,11 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- Similar to LC 27, use a fast and slow pointers.
+- Claude reviewed my approach and simplify as removing the unnecessary nums.length = 0 and the val variable
 
 ---
 
@@ -54,12 +54,12 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
+| **Approach 2** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (Two Pointer)
 
 ```java
 class Solution {
@@ -80,9 +80,26 @@ class Solution {
             }
         }
         return k;
-
     }
 }
 ```
 
+## Solution (Two Pointer - Simplified)
+
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k = 1;                              // write index; nums[0] always kept
+
+        for (int i = 1; i < nums.length; i++) { // i = read index
+            if (nums[i] != nums[k-1]) {         // nums[k-1] = last kept (your `val`)
+                nums[k] = nums[i];
+                k++;                            // no `val` update needed
+            }
+        }
+
+        return k;                               // nums[0..k-1] = distinct values
+    }
+}
+```
 
