@@ -30,11 +30,11 @@ Output: 2
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *HashMap / Boyer–Moore*
 
 Key observations:
--
--
+- My initial thought is solving with HashMap. **Need to enhance my understanding with HashMap in Java**.
+- Learned from NeetCode for the Boyer-Moore algo as approach 2, which could save the space to O(1).
 
 ---
 
@@ -42,12 +42,12 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(n) |
+| **Approach 2** | O(n) | O(1) |
 
 ---
 
-## Solution (Java)
+## Solution (HashMap)
 
 ```java
 class Solution {
@@ -59,6 +59,25 @@ class Solution {
             count.put(n, 1 + count.getOrDefault(n, 0));
             res = count.get(n) > maxCount ? n : res;
             maxCount = Math.max(count.get(n), maxCount);
+        }
+        return res;
+    }
+}
+```
+
+## Solution (Boyer–Moore)
+
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        int res = 0;
+        int count = 0;
+
+        for (int n : nums){
+            if (count == 0){
+                res = n;
+            }
+            count += (n == res) ? 1 : -1;
         }
         return res;
     }
