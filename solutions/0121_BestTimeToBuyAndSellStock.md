@@ -31,11 +31,11 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- Java does not have exponent operator `^`, so 10^5 = 1010 ^ 0101 = 1111 = 15
+- when setting up for minPrice, should use price = 100000 or `Integer.MAX_VALUE` instead
 
 ---
 
@@ -43,8 +43,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
@@ -67,5 +66,3 @@ class Solution {
     }
 }
 ```
-
-
