@@ -30,11 +30,11 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum jump 
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Greedy*
 
 Key observations:
--
--
+- **READ FIRST!!** read the example and question carefully and make sure understand it correctly
+- start at position 0 meaning start with the first element
 
 ---
 
@@ -42,8 +42,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
