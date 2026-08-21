@@ -37,11 +37,11 @@ Explanation: There is no way to make a positive profit, so we never buy the stoc
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Dynamic Programming*
 
 Key observations:
--
--
+- `minPrice = price` make rebuy same day feasible
+- can set minPrice as prices[0] since it stands for the starting point
 
 ---
 
@@ -49,8 +49,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
