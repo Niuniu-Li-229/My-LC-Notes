@@ -22,7 +22,7 @@ Output: 2
 ```
 
 **Constraints:**
-- 1 <= nums.length <= 104
+- 1 <= nums.length <= 10^4
 - 0 <= nums[i] <= 1000
 - It's guaranteed that you can reach nums[n - 1].
 
@@ -30,11 +30,11 @@ Output: 2
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Greedy*
 
 Key observations:
--
--
+- Need two variables compared to JumpGame I
+- Condition for when to jump
 
 ---
 
@@ -42,8 +42,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
