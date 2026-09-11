@@ -32,8 +32,7 @@ Output: false
 **Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- move both pointers or just the right pointer and help shrink the boundary
 
 ---
 
@@ -41,8 +40,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
