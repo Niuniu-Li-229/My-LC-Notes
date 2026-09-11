@@ -29,7 +29,7 @@ Output: false
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
 -
