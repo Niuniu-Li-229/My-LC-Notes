@@ -34,11 +34,10 @@ Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We ret
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- watch the boundary of the pointers in array
 
 ---
 
@@ -46,8 +45,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
