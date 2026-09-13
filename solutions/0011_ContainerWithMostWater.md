@@ -30,11 +30,11 @@ Output: 1
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Two Pointers*
 
 Key observations:
--
--
+- Need to separate the two operations, one for check the max, one for update pointers
+- LeetCode analysis is good!
 
 ---
 
@@ -42,8 +42,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n) | O(1) |
 
 ---
 
@@ -56,6 +55,7 @@ class Solution {
         int j = height.length - 1;
         int max = 0;
 
+        // My old version with nested if-else checks
         // while (i < j){
         //     if (Math.min(height[i], height[j])*(j-i)>max){
         //         max = Math.min(height[i], height[j])*(j-i);
@@ -70,6 +70,7 @@ class Solution {
         //     }
         // }
 
+        // Improved version with LeetCode analysis help
         while (i<j){
             if (Math.min(height[i], height[j])*(j-i)>max){
                 max = Math.min(height[i], height[j])*(j-i);
