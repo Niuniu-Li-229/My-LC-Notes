@@ -5,7 +5,7 @@
 **Date:** 2026-09-09
 **Link:** [LeetCode](https://leetcode.com/problems/is-subsequence/)
 
----
+--- 
 
 ## Problem Summary
 
