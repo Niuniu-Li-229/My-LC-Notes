@@ -33,11 +33,10 @@ Output: 0
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Sliding Window*
 
 Key observations:
--
--
+- window boundary is important and hard to think of when to increment / decrease the window
 
 ---
 
@@ -45,8 +44,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(N) | O(1) |
 
 ---
 
