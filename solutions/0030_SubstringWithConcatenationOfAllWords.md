@@ -27,10 +27,10 @@ Output:
 
 ## Approach
 
-**Strategy:** *(e.g., Sliding Window / BFS / Dynamic Programming / Two Pointers)*
+**Strategy:** *Sliding Window*
 
 Key observations:
--
+- This is way too hard...
 -
 
 ---
@@ -39,8 +39,7 @@ Key observations:
 
 |  | **Time** | **Space** |
 |---|---|---|
-| **Approach 1** | O(?) | O(?) |
-| **Approach 2** | O(?) | O(?) |
+| **Approach 1** | O(n*wordlength) | O(n) |
 
 ---
 
